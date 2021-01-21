@@ -1,0 +1,62 @@
+Request POST http://127.0.0.1:5000/payment
+
+Request Body: JSON 
+{
+	"credit_card_number":"1236468725923579",
+	"card_holder":"User Name",
+	"expiration_date":"2021-02-10",
+	"security_code":"123",
+	"amount": 508
+}
+
+Response:- This is premium payment method
+
+Request POST http://127.0.0.1:5000/payment
+Request Body: JSON 
+{
+	"credit_card_number":"invaid card num",
+	"card_holder":"User Name",
+	"expiration_date":"2021-02-10",
+	"security_code":"123",
+	"amount": 508
+}
+
+Credit Card Number Not Valid, Please provide valid card number
+
+
+Request POST http://127.0.0.1:5000/payment
+Request Body: JSON 
+{
+	"credit_card_number":"1234567891234567",
+	"card_holder":"",
+	"expiration_date":"2021-02-10",
+	"security_code":"123",
+	"amount": 50
+}
+
+Response: Card Holder Name is mendatory
+
+Request POST http://127.0.0.1:5000/payment
+Request Body: JSON 
+{
+	"credit_card_number":"1234567891234567",
+	"card_holder":"UserName",
+	"expiration_date":"2021-01-10",
+	"security_code":"123",
+	"amount": 50
+}
+
+Response: Card Validity is Expired!
+
+
+Request POST http://127.0.0.1:5000/payment
+Request Body: JSON 
+{
+	"credit_card_number":"1234567894234567",
+	"card_holder":"UserName",
+	"expiration_date":"2021-02-10",
+	"security_code":"",
+	"amount": 50
+}
+
+Response: This is cheap payment method Because Expensive Payment is not available, Caution You have used your limit due to Unavailable Expensive method
