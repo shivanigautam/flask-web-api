@@ -1,3 +1,9 @@
+Request GET http://127.0.0.1:5000/
+Respose
+{
+"Hi, Welcome to Web API, Datatable is created"
+}
+
 Request POST http://127.0.0.1:5000/payment
 
 Request Body: JSON 
