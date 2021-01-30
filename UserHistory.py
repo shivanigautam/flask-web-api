@@ -15,12 +15,12 @@ class UserHistory:
 
         cursor = mydb.cursor()
 
-        if methodName == "expensive":
-            tableName  = "userHistory"
-        if methodName == "premium":
-            tableName = "premium"
+   #     if methodName == "expensive":
+   #         tableName  = "userHistory"
+   #     if methodName == "premium":
+   #         tableName = "premium"
 
-        sql = "SELECT * FROM "+tableName+" WHERE card_number = %s"
+        sql = "SELECT * FROM "+methodName+" WHERE card_number = %s"
         cardNum = (acountNumber,)
 
         cursor.execute(sql, cardNum)
@@ -75,3 +75,17 @@ class UserHistory:
         print(mycursor.rowcount, "record inserted.")
         return value
 
+    def createTable(self):
+
+        ## creating connection on MYSQL server
+        mydb = mysql.connector.connect(
+            host="localhost",
+            user="root",
+            password="",
+            database="flask"
+        )
+        cursor = mydb.cursor()
+        cursor.execute("CREATE TABLE premium (id INT AUTO_INCREMENT PRIMARY KEY, acc_holder_name VARCHAR(255), card_number VARCHAR(255))")
+        cursor = mydb.cursor()
+        cursor.execute("CREATE TABLE expensive (id INT AUTO_INCREMENT PRIMARY KEY, acc_holder_name VARCHAR(255), card_number VARCHAR(255))")
+        return "Table Created"
