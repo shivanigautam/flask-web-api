@@ -7,15 +7,20 @@ from UserHistory import UserHistory
 
 app = Flask(__name__)
 
+
 @app.route("/")
 def index():
-    return "Hi, Welcome to Web API"
+    userHistory = UserHistory()
+    tableValue = userHistory.createTable()
+    return "Hi, Welcome to Web API, Datatable is created"
+
+
 
 @app.route("/payment", methods=['POST', 'GET'])
 def ProcessPayment():
     global result
 
-    methodname  = PaymentMethod()
+    methodname = PaymentMethod()
     userHistory = UserHistory()
     if request.method == 'POST':
 
@@ -59,7 +64,7 @@ def ProcessPayment():
         # so it will served by CHeap pyment gateway method
         if (amount <= 20):
             result = methodname.CheapPaymentGateWay()
-            #result = CheapPaymentGateWay()
+            # result = CheapPaymentGateWay()
         ## if amount is in between below range so
         ## it will accessed by Expensive Payment Method
         elif (amount >= 21) & (amount <= 500):
@@ -82,7 +87,7 @@ def ProcessPayment():
             ## save userHistory on 'premium' table
             userHistory.PremiumHistory(cardHolderName, credCardNum)
             ## read user history from 'premium' Table
-            value = userHistory.userHist(credCardNum,"premium")
+            value = userHistory.userHist(credCardNum, "premium")
             ## only three tries is possibe for one user at a time
             if (value > 3):
                 return "You have exhausted limit Of Premium Payment Method"
@@ -98,8 +103,8 @@ def ifAvailable():
     import datetime
     available = False
 
-    #AS of now unavailabe of Expensive Payment Gateway Method is HARDCODED from 8PM to 10PM
-    #Please avoid these time duration if you want to use Expensive Payment Gateway Method
+    # AS of now unavailabe of Expensive Payment Gateway Method is HARDCODED from 8PM to 10PM
+    # Please avoid these time duration if you want to use Expensive Payment Gateway Method
     uprLimit = datetime.time(20, 00, 00)
     lowerLimit = datetime.time(22, 00, 00)
 
